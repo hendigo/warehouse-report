@@ -15,6 +15,8 @@ ws.Range("A11:A" & numberCount + 10).Borders.LineStyle = xlNone
 
 End If
 
+'Debug.Print numberCount
+
 For i = 1 To rowCount
         Set rg = ws.Cells(10 + i, "A") ' Menetapkan rentang sel ke variabel rg
         rg.Value = i
@@ -46,9 +48,9 @@ Set changeRange = Intersect(Target, Me.Range("C2:E2"))
     
         rgData.AdvancedFilter xlFilterCopy, rgCriteria, rgDestination
         
-        ThisWorkbook.Worksheets("REPORT").Range("L6").Formula = "=IF(ISBLANK($C$2),""Semua Transaksi In & Out"",""Transaksi "" & $C$2 & "" In & Out"")"
-        ThisWorkbook.Worksheets("REPORT").Range("L7").Formula = "=IF(ISBLANK($C$2),""Total semua stok Gudang"",""Total Stok "" & $C$2 & "" di Gudang"")"
-        ThisWorkbook.Worksheets("REPORT").Range("L8").Formula = "=IF(ISBLANK($C$2),""Total Transaksi In Out dan Stok Gudang"",""Total Transaksi In Out dan Stok "" & $C$2 & "" Gudang"")"
+        ThisWorkbook.Worksheets("REPORT").Range("L6").Formula = "=IF(ISBLANK($C$2),""Total Seluruh Pengeluaran"",""Total Pengeluaran Untuk : "" & $C$2)"
+        ThisWorkbook.Worksheets("REPORT").Range("L7").Formula = "=IF(ISBLANK($C$2),""Total Seluruh Stok di Gudang"",""Total Stok : "" & $C$2)"
+        ThisWorkbook.Worksheets("REPORT").Range("L8").Formula = "=IF(ISBLANK($C$2),""Jumlah Pengeluaran & Stok"",""Jumlah Pengeluaran & Stok "" & $C$2)"
         
     
         ThisWorkbook.Worksheets("REPORT").Range("M6").Formula = "=IF(ISBLANK(REPORT!$C$2),SUMIFS(DATA!$Q:$Q,DATA!$K:$K,"">=1""),SUMIFS(DATA!$Q:$Q,DATA!$K:$K,"">=1"",DATA!$F:$F,REPORT!$C$2))"
@@ -56,5 +58,6 @@ Set changeRange = Intersect(Target, Me.Range("C2:E2"))
         ThisWorkbook.Worksheets("REPORT").Range("M8").Formula = "=SUM($M$6:$M$7)"
         
         NumberingCells
+        
     End If
 End Sub
